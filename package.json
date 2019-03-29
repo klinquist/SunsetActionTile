@@ -1,0 +1,18 @@
+{
+  "name": "sunsetactiontile",
+  "version": "1.0.0",
+  "description": "Sunrise/Sunset Action Tile",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kris Linquist <kris@linquist.net>",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.4.1",
+    "express": "^4.16.4",
+    "moment-timezone": "^0.5.23",
+    "suncalc": "^1.8.0",
+    "tz-lookup": "^6.1.16"
+  }
+}
