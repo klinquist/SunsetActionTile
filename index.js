@@ -66,6 +66,7 @@ function draw(text, size, bgcolor, fgcolor, time) {
     ctx.font = `${fontSize}px Impact`;
     const hexColor = `#${bgcolor}`;
     const rgbColor = hexToRgb(hexColor);
+    if (!rgbColor) return drawError('Invalid fgcolor/bgcolor');
     ctx.fillStyle = `rgb(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b})`;
     ctx.fillRect(0, 0, xSize, ySize);
     ctx.fillStyle = `#${fgcolor}`;
