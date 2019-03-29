@@ -5,7 +5,28 @@ For SmartThings ActionTiles.
 
 ## Installation & Usage
 
-See: https://support.actiontiles.com/communities/12/topics/6206-i-created-a-sunrisesunset-tile
+Use this Media Still Image URL:
+
+https://sunsettile.app/sunset?lat=YY.YYYY&long=-XX.XXX&bgcolor=3b3749&fgcolor=ffffff&size=3x2
+
+Use the base URL https://sunsettile.app/sunset for sunset and https://sunsettile.app/sunrise for sunrise
+
+Required parameters: 
+
+* lat (latitude)
+* long (longitude)
+* bgcolor (background color  - hex color without #)
+* fgcolor (foreground color - hex color without #)
+
+Optional parameter:
+
+* timeformat=24 (For 24 hour time)
+
+
+ActionTiles discussion forum:
+
+https://support.actiontiles.com/communities/12/topics/6206-i-created-a-sunrisesunset-tile
+
 
 ## License
  
