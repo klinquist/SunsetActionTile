@@ -3,7 +3,7 @@
 For SmartThings ActionTiles. Example: 
 
 ![sunrise tile](https://sunsettile.app/sunrise?lat=41.26&long=-73.5&bgcolor=000000&fgcolor=FFFFFF&size=1x1)
-![sunset tile](https://sunsettile.app/sunrise?lat=41.26&long=-73.5&bgcolor=000000&fgcolor=FFFFFF&size=1x1)
+![sunset tile](https://sunsettile.app/sunset?lat=41.26&long=-73.5&bgcolor=000000&fgcolor=FFFFFF&size=1x1)
 
 ## Installation & Usage
 
