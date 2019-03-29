@@ -17,6 +17,7 @@ Required parameters:
 * long (longitude)
 * bgcolor (background color  - hex color without #)
 * fgcolor (foreground color - hex color without #)
+* size (1x1 to 3x3)
 
 Optional parameter:
 
