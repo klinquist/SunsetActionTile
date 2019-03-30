@@ -24,6 +24,7 @@ Required parameters:
 Optional parameter:
 
 * timeformat=24 (For 24 hour time)
+* fontsize=x.x (changes the font size & spacing.  Specified as a multiplier... i.e. for 20% bigger, use &fontsize=1.2)
 
 
 ActionTiles discussion forum:

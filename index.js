@@ -29,7 +29,7 @@ function drawError(text) {
     var Image = Canvas.Image,
         canvas = new Canvas.createCanvas(500, 500),
         ctx = canvas.getContext('2d');
-    ctx.font = '30px Impact';
+    ctx.font = '30px Helvetica';
     ctx.fillStyle = 'rgb(255,0,0)';
     ctx.fillRect(0, 0, 500, 500);
     ctx.fillStyle = '#ffffff';
@@ -40,7 +40,7 @@ function drawError(text) {
     return canvas;
 }
 
-function draw(text, size, bgcolor, fgcolor, time) {
+function draw(text, size, bgcolor, fgcolor, time, fsmultiplier) {
     let xSize = Number(size.split('x')[0]);
     let ySize = Number(size.split('x')[1]);
 
@@ -57,6 +57,10 @@ function draw(text, size, bgcolor, fgcolor, time) {
         case 3:
             fontSize = 90;
             fontDistance = 50;
+    }
+    if (fsmultiplier) {
+        fontSize = fontSize * Number(fsmultiplier);
+        fontDistance = fontDistance * Number(fsmultiplier);
     }
     xSize = xSize * 200;
     ySize = ySize * 200;
@@ -93,39 +97,27 @@ const validate = (lat, long, bgcolor, fgcolor, size) => {
 };
 
 app.get('/sunrise', (req, res, next) => {
-    const lat = req.query.lat;
-    const long = req.query.long;
-    const bgcolor = req.query.bgcolor;
-    const fgcolor = req.query.fgcolor;
-    const size = req.query.size;
-    const timeFormat = req.query.timeformat;
     res.setHeader('Content-Type', 'image/png');
-    const validation = validate(lat,long,bgcolor,fgcolor,size);
+    const validation = validate(req.query.lat, req.query.long, req.query.bgcolor, req.query.fgcolor, req.query.size);
     if (validation) {
         return drawError(validation).pngStream().pipe(res);
     }
-    const sunrise = times.getSunrise(Number(lat), Number(long), timeFormat);
+    const sunrise = times.getSunrise(Number(req.query.lat), Number(req.query.long), req.query.timeformat);
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    log(`${ip} Returning Sunrise for ${lat},${long}`);
-    return draw('Sunrise', size, bgcolor, fgcolor, sunrise).pngStream().pipe(res);
+    log(`${ip} Returning ${req.query.size} sunrise panel for ${req.query.lat},${req.query.long}`);
+    return draw('Sunrise', req.query.size, req.query.bgcolor, req.query.fgcolor, sunrise, req.query.fontsize).pngStream().pipe(res);
 });
 
 app.get('/sunset', (req, res, next) => {
-    const lat = req.query.lat;
-    const long = req.query.long;
-    const bgcolor = req.query.bgcolor;
-    const fgcolor = req.query.fgcolor;
-    const size = req.query.size;
-    const timeFormat = req.query.timeformat;
     res.setHeader('Content-Type', 'image/png');
-    const validation = validate(lat, long, bgcolor, fgcolor, size);
+    const validation = validate(req.query.lat, req.query.long, req.query.bgcolor, req.query.fgcolor, req.query.size);
     if (validation) {
         return drawError(validation).pngStream().pipe(res);
     }
-    const sunrise = times.getSunset(Number(lat), Number(long), timeFormat);
+    const sunrise = times.getSunset(Number(req.query.lat), Number(req.query.long), req.query.timeformat);
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    log(`${ip} Returning Sunset for ${lat},${long}`);
-    return draw('Sunset', size, bgcolor, fgcolor, sunrise).pngStream().pipe(res);
+    log(`${ip} Returning ${req.query.size} sunset panel for ${req.query.lat},${req.query.long}`);
+    return draw('Sunset', req.query.size, req.query.bgcolor, req.query.fgcolor, sunrise, req.query.fontsize).pngStream().pipe(res);
 });
 
 app.listen(4000, () => console.log('Sunrise/Sunset Tile app listening on port 4000'));
