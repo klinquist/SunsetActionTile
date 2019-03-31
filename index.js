@@ -120,4 +120,16 @@ app.get('/sunset', (req, res, next) => {
     return draw('Sunset', req.query.size, req.query.bgcolor, req.query.fgcolor, sunrise, req.query.fontsize).pngStream().pipe(res);
 });
 
+
+app.get('/text', (req, res, next) => {
+    res.setHeader('Content-Type', 'image/png');
+    //const validation = validate(req.query.lat, req.query.long, req.query.bgcolor, req.query.fgcolor, req.query.size);
+    //if (validation) {
+    //    return drawError(validation).pngStream().pipe(res);
+    //}
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    log(`${ip} Returning ${req.query.size} sunset panel for ${req.query.lat},${req.query.long}`);
+    return draw(req.query.line1, req.query.size, req.query.bgcolor, req.query.fgcolor, req.query.line2, req.query.fontsize).pngStream().pipe(res);
+});
+
 app.listen(4000, () => console.log('Sunrise/Sunset Tile app listening on port 4000'));
