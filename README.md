@@ -25,6 +25,7 @@ Optional parameter:
 
 * timeformat=24 (For 24 hour time)
 * fontsize=x.x (changes the font size & spacing.  Specified as a multiplier... i.e. for 20% bigger, use &fontsize=1.2)
+* offset=x (number of minutes you'd like the result to be offset, supports both positive and negative numbers)
 
 
 ActionTiles discussion forum:

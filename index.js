@@ -84,7 +84,7 @@ function draw(text, size, bgcolor, fgcolor, time, fsmultiplier) {
 
 
 const validate = (lat, long, bgcolor, fgcolor, size) => {
-        //validation
+    //validation
     if (!RegExp(/^-?\d+\.\d+$/).test(lat) || !RegExp(/^-?\d+\.\d+$/).test(long)) {
         return 'Invalid lat/long';
     }
@@ -102,7 +102,7 @@ app.get('/sunrise', (req, res, next) => {
     if (validation) {
         return drawError(validation).pngStream().pipe(res);
     }
-    const sunrise = times.getSunrise(Number(req.query.lat), Number(req.query.long), req.query.timeformat);
+    const sunrise = times.getSunrise(Number(req.query.lat), Number(req.query.long), req.query.timeformat, req.query.offset);
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log(`${ip} Returning ${req.query.size} sunrise panel for ${req.query.lat},${req.query.long}`);
     return draw('Sunrise', req.query.size, req.query.bgcolor, req.query.fgcolor, sunrise, req.query.fontsize).pngStream().pipe(res);
@@ -114,7 +114,7 @@ app.get('/sunset', (req, res, next) => {
     if (validation) {
         return drawError(validation).pngStream().pipe(res);
     }
-    const sunrise = times.getSunset(Number(req.query.lat), Number(req.query.long), req.query.timeformat);
+    const sunrise = times.getSunset(Number(req.query.lat), Number(req.query.long), req.query.timeformat, req.query.offset);
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log(`${ip} Returning ${req.query.size} sunset panel for ${req.query.lat},${req.query.long}`);
     return draw('Sunset', req.query.size, req.query.bgcolor, req.query.fgcolor, sunrise, req.query.fontsize).pngStream().pipe(res);
